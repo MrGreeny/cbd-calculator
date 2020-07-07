@@ -1,0 +1,19 @@
+<mat-form-field appearance="fill" >
+  <mat-label>Select Option</mat-label>
+  <mat-select [(value)]="selected" >
+    <mat-option value="isolate">Isolate</mat-option>
+    <mat-option value="flower-extract">Flower Extract</mat-option>
+    <mat-option value="formulation">Formulation</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+<app-isolate *ngIf="selected=='isolate'" ></app-isolate>
+
+<app-flower-extract *ngIf="selected=='flower-extract'" ></app-flower-extract>
+
+<app-formulation *ngIf="selected=='formulation'"></app-formulation>
+
+<app-address-input></app-address-input>
+

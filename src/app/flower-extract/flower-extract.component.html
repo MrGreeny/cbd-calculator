@@ -1,0 +1,14 @@
+<p>Flower Extract</p>
+
+<mat-slider 
+    min="300" 
+    max="100000" 
+    step="100" 
+    value="300"
+    (input)="calculatePrice($event.value)" 
+    [value]="quantity">
+</mat-slider>
+
+<div>Quantity: {{ quantity }}</div>
+<div>Price: {{ price }} </div>
+<div>Price per Gramm: {{ pricePerGramm }} </div>
