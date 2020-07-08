@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CarrierOil } from '../../shared/models/carrierOil'
+
+
 
 @Component({
   selector: 'app-formulation',
@@ -7,33 +10,71 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormulationComponent implements OnInit {
 
-  public quantity: number;
+  price: number;
+  cbdConcentration: number;
+  carrierOilPrice: number;
   chosenExtractType: string;
+  productQuantity: number;
+  cbdPrice: number;
+  cbdQuantity: number;
+  
+  //ID, Name, Price
+  carrierOils: CarrierOil[] = [
+    {id: 0, name: "Olive Oil", price: 1.5 },
+    {id: 1, name: "Chia Oil", price: 5.0 },
+    {id: 2, name: "Hemp Oil", price: 4.0 },
+  ];
+  selectedCarrierOil: string;
 
 
   constructor() { }
 
   ngOnInit(): void {
-    this.quantity = 0.0;
-
+    this.cbdConcentration = 0.0;
+    this.productQuantity = 0.0;
+    this.carrierOilPrice = 0.0;
+    this.cbdPrice = 0.0;
+    this.cbdQuantity = 0.0;
   }
 
-  calculatePrice(quantity){
-    // this.quantity = quantity;
-    // if (this.quantity > 0 && this.quantity < 5000) {
-    //   this.pricePerGramm = 5.0;
-    //   this.price = this.pricePerGramm * this.quantity * 0.33;
-    // } else if (this.quantity >= 5000 && this.quantity < 10000) {
-    //   this.pricePerGramm = 4.0;
-    //   this.price = this.pricePerGramm * this.quantity * 0.33;
-    // } else if (this.quantity >= 10000) {
-    //   this.pricePerGramm = 3.0;
-    //   this.price = this.pricePerGramm * this.quantity * 0.33;
-    // }
+  onChangeExtractType(event) {
+    this.cbdConcentration = 0.0;
   }
 
+  onChangePercentConcentration(percentConcentration){
+    this.cbdConcentration = percentConcentration;
+    this.cbdQuantity = this.productQuantity * (percentConcentration/100);
+
+    if (this.chosenExtractType === 'flower-extract') {
+      this.cbdPrice = 3.0;
+      
+    } else if ( this.chosenExtractType === 'flower-isolate') {
+      this.cbdPrice = 5.0;
+      
+    }
+    else {
+      //TODO: ERROR HANDLING
+    }
+    this.calculatePrice();
+  }
+
+  onChangeProductQuantity(productQuantity) {
+    this.productQuantity = productQuantity;
+    this.calculatePrice();
+  }
+
+  onChangeCarrierOil(oil) {
+    this.carrierOilPrice = oil.value;
+    this.calculatePrice();
+  }
+
+  calculatePrice(){
+    let costCarrierOil = this.carrierOilPrice * this.productQuantity;
+    let costCBD = this.cbdPrice * this.cbdQuantity;
+    this.price = costCarrierOil + costCBD;
+  }
 }
 
-// (input)="calculatePriceIsolate($event.value)" 
-// [value]="quantityIsolate">
+
+
 
