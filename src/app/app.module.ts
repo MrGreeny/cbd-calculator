@@ -1,5 +1,3 @@
-
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +9,6 @@ import { AddressInputComponent } from './address-input/address-input.component';
 import { IsolateComponent } from './isolate/isolate.component';
 import { FlowerExtractComponent } from './flower-extract/flower-extract.component';
 import { FormulationComponent } from './formulation/formulation.component';
-// import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
