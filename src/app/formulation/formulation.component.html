@@ -19,11 +19,10 @@
         (input)="onChangePercentConcentration($event.value)" 
         [value]="cbdConcentration"
         [disabled]="chosenExtractType != 'isolate'"
+        [displayWith]="formatLabel"
         >
     </mat-slider> 
-    <div *ngIf="chosenExtractType === 'isolate'">
-      <p>{{cbdConcentration}}%</p>
-    </div>
+    <div *ngIf="chosenExtractType === 'isolate'"></div>
 
     </div>
   
@@ -38,11 +37,11 @@
     (input)="onChangePercentConcentration($event.value)" 
     [value]="cbdConcentration"
     [disabled]="chosenExtractType != 'flower-extract'"
+    [displayWith]="formatLabel"
+    thumbLabel
     >
     </mat-slider>
-    <div *ngIf="chosenExtractType === 'flower-extract'">
-      <p>{{cbdConcentration}}%</p>
-    </div>
+    <div *ngIf="chosenExtractType === 'flower-extract'"></div>
 
 </div>
 </mat-radio-group>

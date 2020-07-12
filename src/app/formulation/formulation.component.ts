@@ -109,6 +109,13 @@ export class FormulationComponent implements OnInit {
     }
   }
 
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+    return value;
+  }
+
   calculatePrice(){
     this.costCarrierOil = this.carrierOilPrice * this.productQuantity;
     this.costCBD = this.cbdPrice * this.cbdQuantity;
