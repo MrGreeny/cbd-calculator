@@ -9,6 +9,7 @@ import { AddressInputComponent } from './address-input/address-input.component';
 import { IsolateComponent } from './isolate/isolate.component';
 import { FlowerExtractComponent } from './flower-extract/flower-extract.component';
 import { FormulationComponent } from './formulation/formulation.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -16,6 +17,8 @@ import { FormulationComponent } from './formulation/formulation.component';
     FormsModule,
     AppMaterialModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    
   ],
   declarations: [AppComponent, AddressInputComponent, IsolateComponent, FlowerExtractComponent, FormulationComponent],
   entryComponents: [],

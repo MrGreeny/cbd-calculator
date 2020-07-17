@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrierOil } from '../../shared/models/carrierOil'
 import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
-
+import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -23,16 +23,11 @@ export class FormulationComponent implements OnInit {
   costCarrierOil: number;
   costCBD: number;
   
-  //ID, Name, Price
-  carrierOils: CarrierOil[] = [
-    {id: 0, name: "Olive Oil", price: 1.5 },
-    {id: 1, name: "Chia Oil", price: 5.0 },
-    {id: 2, name: "Hemp Oil", price: 4.0 },
-  ];
+  carrierOils: any = [];
   selectedCarrierOil: string;
 
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.cbdConcentration = 0.0;
@@ -44,6 +39,12 @@ export class FormulationComponent implements OnInit {
 
     this.costCarrierOil = 0.0;
     this.costCBD= 0.0;
+
+    this.httpClient.get("assets/data/carrierOils.json").subscribe(data =>{
+      console.log(data);
+      this.carrierOils = data;
+    });
+
   }
 
   onChangeExtractType(event) {

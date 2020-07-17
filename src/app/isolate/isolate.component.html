@@ -1,9 +1,9 @@
 <div>
-  <p>97% Isolate MOQ: 300g CBD</p>
+  <p>{{ percentIsolate }}% Isolate MOQ: {{moq}}g CBD</p>
 
   <mat-slider 
-    min="300" 
-    max="50000" 
+    [min]="moq" 
+    [max]="maxq" 
     step="100" 
     value="300"
     (input)="calculatePrice($event.value)" 
