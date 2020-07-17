@@ -31,6 +31,10 @@ export class AddressInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    console.log("submit form!")
+  }
+
 }
 
 

@@ -4,7 +4,7 @@
   [(ngModel)]="chosenExtractType"
   (input)="onChangeExtractType($event)"
   >
-  <div>
+  <div class="form-type-container">
       <mat-radio-button 
         class="example-radio-button" 
         value="isolate"
@@ -20,30 +20,32 @@
         [value]="cbdConcentration"
         [disabled]="chosenExtractType != 'isolate'"
         [displayWith]="formatLabel"
+        thumbLabel
         >
     </mat-slider> 
+    
     <div *ngIf="chosenExtractType === 'isolate'"></div>
 
     </div>
   
-    <div>
-    <mat-radio-button class="example-radio-button" value="flower-extract">Flower Extract</mat-radio-button>
-    <mat-slider 
-    *ngIf="chosenExtractType === 'flower-extract'"
-    min="1" 
-    max="30" 
-    step="0.5" 
-    value="0"
-    (input)="onChangePercentConcentration($event.value)" 
-    [value]="cbdConcentration"
-    [disabled]="chosenExtractType != 'flower-extract'"
-    [displayWith]="formatLabel"
-    thumbLabel
-    >
-    </mat-slider>
+    <div class="form-type-container">
+      <mat-radio-button class="example-radio-button" value="flower-extract">Flower Extract</mat-radio-button>
+      <mat-slider 
+      *ngIf="chosenExtractType === 'flower-extract'"
+      min="1" 
+      max="30" 
+      step="0.5" 
+      value="0"
+      (input)="onChangePercentConcentration($event.value)" 
+      [value]="cbdConcentration"
+      [disabled]="chosenExtractType != 'flower-extract'"
+      [displayWith]="formatLabel"
+      thumbLabel
+      >
+      </mat-slider>
     <div *ngIf="chosenExtractType === 'flower-extract'"></div>
 
-</div>
+  </div>
 </mat-radio-group>
 
 
@@ -71,8 +73,11 @@ step="0.5"
 value="0"
 (input)="onChangeProductQuantity($event.value)" 
 [value]="productQuantity"
+thumbLabel
+[displayWith]="formatLabel"
 >
 </mat-slider>
+
 <p>Product Quantity: {{productQuantity}} kg</p>
 
 <p>End Price: {{ price }}</p>

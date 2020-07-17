@@ -7,7 +7,11 @@
     step="100" 
     value="300"
     (input)="calculatePrice($event.value)" 
-    [value]="quantity">
+    [value]="quantity"
+    thumbLabel
+    [displayWith]="formatLabel"
+    >
+    
   </mat-slider>
 
     <div>Quantity: {{ quantity }}</div>

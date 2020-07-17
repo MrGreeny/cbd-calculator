@@ -19,6 +19,13 @@ export class IsolateComponent implements OnInit {
     this.pricePerGramm = 0.0;
   }
 
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+    return value;
+  }
+
   calculatePrice(quantity){
     this.quantity = quantity;
     if (this.quantity > 0 && this.quantity < 5000) {
