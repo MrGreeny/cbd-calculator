@@ -1,9 +1,12 @@
 <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput 
-            [errorStateMatcher]="matcher"
-             placeholder="Ex. pat@example.com">
+      <input 
+        matInput 
+        [errorStateMatcher]="matcher"
+        placeholder="Ex. pat@example.com"
+        (keyup)="onKey($event)"
+        >
       <mat-hint>Errors appear instantly! (Email form - TODO)</mat-hint>
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
         Please enter a valid email address
@@ -14,6 +17,4 @@
     </mat-form-field>
   </form>
 
-  <button mat-button (click)="onSubmit()">Submit</button>
-  
-  <!-- [formControl]="emailFormControl"  -->
+<!--TODO: VAliDATION -->

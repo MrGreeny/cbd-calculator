@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { IsolateData } from "../../shared/models/isolateData"
+import { Order, OrderType } from "../../shared/models/order"
 
 
 @Component({
@@ -17,15 +18,17 @@ export class IsolateComponent implements OnInit {
   public maxq: number;
   public isolateData: IsolateData;
   public percentIsolate: number;
+  public order: Order;
 
   constructor(private httpClient: HttpClient) {}
+
+
 
   ngOnInit(): void {
     this.price = 0.0;
     this.quantity = 0.0;
     this.pricePerGramm = 0.0;
-
-
+    this.order = new Order();
 
     this.httpClient.get("assets/data/isolate.json").subscribe( (data: IsolateData) => {
       console.log(data);
@@ -55,5 +58,15 @@ export class IsolateComponent implements OnInit {
       this.pricePerGramm = 2.0;
       this.price = this.pricePerGramm * this.quantity;
     }
+
+    this.fillOrder();
+  }
+
+  fillOrder(){
+    this.order.quantity = this.quantity;
+    this.order.calculatedPrice = this.price;
+    this.order.orderType  = OrderType.Isolate;
+    this.order.concentration = this.percentIsolate;
+    this.order.pricePerGram = this.pricePerGramm;
   }
 }

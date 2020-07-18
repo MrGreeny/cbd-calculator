@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Order, OrderType } from 'src/shared/models/order';
 
 @Component({
   selector: 'app-flower-extract',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlowerExtractComponent implements OnInit {
 
+
+
   public price: number;
   public quantity: number;
   public pricePerGramm: number;
+  public order: Order;
+
 
   constructor() { }
 
@@ -17,6 +22,7 @@ export class FlowerExtractComponent implements OnInit {
     this.price = 0.0;
     this.quantity = 0.0;
     this.pricePerGramm = 0.0;
+    this.order = new Order();
   }
 
   formatLabel(value: number) {
@@ -38,5 +44,14 @@ export class FlowerExtractComponent implements OnInit {
       this.pricePerGramm = 3.0;
       this.price = this.pricePerGramm * this.quantity * 0.33;
     }
+
+    this.fillOrder();
+  }
+  fillOrder(){
+    this.order.quantity = this.quantity;
+    this.order.calculatedPrice = this.price;
+    this.order.orderType  = OrderType.FlowerExtract;
+    this.order.pricePerGram = this.pricePerGramm;
+    //this.order.concentration = this.percentIsolate;
   }
 }

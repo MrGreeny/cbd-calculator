@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarrierOil } from '../../shared/models/carrierOil'
 import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
 import { HttpClient } from "@angular/common/http";
+import { Order, OrderType } from 'src/shared/models/order';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class FormulationComponent implements OnInit {
   costCBD: number;
   
   carrierOils: any = [];
-  selectedCarrierOil: string;
+  selectedCarrierOil = '';
+  public order: Order;
 
 
   constructor(private httpClient: HttpClient) { }
@@ -36,9 +38,9 @@ export class FormulationComponent implements OnInit {
     this.carrierOilPrice = 0.0;
     this.cbdPrice = 0.0;
     this.cbdQuantity = 0.0;
-
     this.costCarrierOil = 0.0;
     this.costCBD= 0.0;
+    this.order = new Order();
 
     this.httpClient.get("assets/data/carrierOils.json").subscribe(data =>{
       console.log(data);
@@ -68,9 +70,13 @@ export class FormulationComponent implements OnInit {
     this.calculatePrice();
   }
 
-
   onChangeCarrierOil(oil) {
-    this.carrierOilPrice = oil.value;
+
+    //NOTE: Here, because of "cyclic object value" WTF?
+  
+    this.order.carrierOil = oil.value;
+    // this.selectedCarrierOil = JSON.stringify(oil);
+    this.carrierOilPrice = oil.value.price;
     this.calculatePrice();
   }
 
@@ -121,6 +127,25 @@ export class FormulationComponent implements OnInit {
     this.costCarrierOil = this.carrierOilPrice * this.productQuantity;
     this.costCBD = this.cbdPrice * this.cbdQuantity;
     this.price = this.costCarrierOil + this.costCBD;
+    this.fillOrder();
+  }
+
+  fillOrder(){
+
+    this.order.isFormulation = true;
+
+    if (this.chosenExtractType === 'flower-extract') { 
+      this.order.orderType = OrderType.FlowerExtract;
+    } else if (this.chosenExtractType === 'isolate') {
+      this.order.orderType = OrderType.Isolate;
+    }
+
+    this.order.concentration = this.cbdConcentration;
+    this.order.calculatedPrice = this.price;
+    this.order.quantity = this.productQuantity;
+    this.order.pricePerGram = this.cbdPrice;
+    //NOTE: oil type is in the onChangeCarrierOil method
+    //TODO: Refactor!
   }
 }
 

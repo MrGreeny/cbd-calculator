@@ -3,7 +3,8 @@
         "moq": 300,
         "maxq": 50000,
         "isolatePercentage": 97,
-        "priceSteps": [
+        "priceSteps": 
+        [
             {"min": 0, "max": 5000, "price": 3.0},
             {"min": 5001, "max": 10000, "price": 2.5}
         ]

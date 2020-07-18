@@ -53,11 +53,10 @@
   <mat-form-field appearance="fill">
     <mat-select  
     placeholder="Carrier Oil"  
-    [(ngModel)]="selectedCarrierOil"
     name="carrierOil"
     (selectionChange)="onChangeCarrierOil($event)"
     >
-    <mat-option *ngFor="let oil of carrierOils" [value]="oil.price">
+    <mat-option *ngFor="let oil of carrierOils" [value]="oil">
       {{oil.name}}
     </mat-option>
   </mat-select>
